@@ -12,7 +12,7 @@ const App = () => {
   const [wave, setWave] = React.useState(0);
 
 React.useEffect(() => {
-    const { ethereum } = window;
+    const { ethereum }:any = window;
     setEthereum(ethereum);
     setAccount(ethereum, setCurrentAccount);
     setWaves(ethereum, setWave);
