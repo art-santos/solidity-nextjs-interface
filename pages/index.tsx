@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Flex, Spinner, Text, Stack, Input, FormControl, FormLabel, HStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Spinner, Text, Stack, Input, FormControl, FormLabel, HStack, VStack, StatLabel, Stat, StatNumber, StatHelpText } from "@chakra-ui/react";
 import { setWaves } from "../functions/set/setWaves";
 import { setAllWaves } from "../functions/set/setTotalWaves";
 import { setAccount } from "../functions/set/setAccount";
@@ -39,7 +39,7 @@ const handleSubmit = async () => {
     {pending ? <Spinner /> 
     : 
     <Box textAlign="center">
-        <Text>{wave}</Text>
+        <Text><strong>total waves:</strong> {wave}</Text>
         <FormControl
         onSubmit={() => handleSubmit()}
         >
@@ -62,17 +62,35 @@ const handleSubmit = async () => {
     }
     
     </Flex>
+    <Stack
+    justify="center"
+    display="grid"
+    gridGap={5}
+    p={5}
+    bgColor="gray.100"
+    spacing={5}
+    >
         {totalWaves.map((item:any) => (
             <>
-            <HStack key={item.timestamp} p={5} justify="center" align="center" boxShadow="md" >
-            <Text>{item.message}</Text>
-            |
-            <Text>By: {item.address}</Text>
-            |
-            <Text>In: {item.timestamp}</Text>
-            </HStack>
+            <Stat
+            bgColor="white"
+            key={item.timestamp}
+            p={5}
+            justify="center"
+            align="center"
+            boxShadow="lg"
+            borderRadius="5px"
+            spacing={5}
+            h="100px"
+            w="100%"
+            >
+            <StatLabel><strong>By:</strong> {item.address}</StatLabel>
+            <StatNumber fontSize="20px">{item.message}</StatNumber>
+            <StatHelpText>{item.timestamp}</StatHelpText>
+            </Stat>
             </>
         ))}
+    </Stack>
     </Stack>
   );
 }
